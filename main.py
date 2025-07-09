@@ -1,4 +1,5 @@
 from storage.storage_json import load_data
+from storage.storage_html import load_html
 
 
 def get_animal_name(animals):
@@ -53,21 +54,39 @@ def get_animal_info(animals):
     return all_animal_info
 
 
-def print_animal_info(animals):
+def order_animal_info_into_str(animals):
     num_animals = len(animals["Name"])
+    animal_info_as_str = ""
 
     for i in range(num_animals):
         for category, value in animals.items():
             if value is None or value[i] is None:
                 continue
-            print(f'{category}: {value[i]}')
-        print()
+            animal_info_as_str += f'{category}: {value[i]}\n'
+        animal_info_as_str += "\n"
+
+    return animal_info_as_str
+
+
+def replace_data_in_html(animals_data):
+    html = load_html("storage/storage_html.py")
+    modified_html = html.replace(
+        "__REPLACE_ANIMALS_INFO__", animals_data.strip('\n')
+    )
+    return modified_html
+
+
+def create_animals_html(html_data):
+    with open("static/animals.html", "w", encoding="utf-8") as handle:
+        handle.write(html_data)
 
 
 def main():
     animals_data = load_data("data/animals_data.json")
     animal_info = get_animal_info(animals_data)
-    print_animal_info(animal_info)
+    animals_data_str = order_animal_info_into_str(animal_info)
+    modified_html_str = replace_data_in_html(animals_data_str)
+    create_animals_html(modified_html_str)
 
 
 if __name__ == "__main__":
