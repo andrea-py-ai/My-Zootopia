@@ -14,6 +14,7 @@ def get_animal_name(animals):
 def get_animal_diet(animals):
     pass
 
+
 def get_animal_first_location(animals):
     pass
 
@@ -23,16 +24,25 @@ def get_animal_type(animals):
 
 
 def get_animal_info(animals):
-    all_animal_info = {"animal_names": get_animal_name,
-                       "animal_diet": get_animal_diet,
-                       "animal_first_location": get_animal_first_location,
-                       "animal_type": get_animal_type}
-
+    all_animal_info = {
+        "Name": get_animal_name(animals),
+        "Diet": get_animal_diet(animals),
+        "Location": get_animal_first_location(animals),
+        "Type": get_animal_type(animals)
+    }
     return all_animal_info
 
 
 def print_animal_info(animals):
-    pass
+    num_animals = len(animals["Name"])
+
+    for i in range(num_animals):
+        for category, value in animals.items():
+            if value:
+                print(f'{category}: {value[i]}')
+            else:
+                continue
+            print()
 
 
 def main():
