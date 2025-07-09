@@ -57,15 +57,15 @@ def serialize_animal(animals, i):
     lines = [
         '<li class="cards__item">',
         f'<div class="card__title">{animals["Name"][i]}</div>',
-        '<p class="card__text">'
+        '<div class="card__text">', '<ul>'
     ]
 
     for category in ["Diet", "Location", "Type"]:
         value = animals[category][i]
         if value is not None:
-            lines.append(f'<strong>{category}:</strong> {value}<br/>')
+            lines.append(f'<li><strong>{category}:</strong> {value}</li>')
 
-    lines.append('</p>\n</li>')
+    lines.append('</ul>\n</div>\n</li>')
 
     return "\n".join(lines)
 
