@@ -5,22 +5,42 @@ def get_animal_name(animals):
     animal_names = []
 
     for animal in animals:
-        if animal:
-            animal_names.append(animal["name"])
+        animal_names.append(animal["name"])
 
     return animal_names
 
 
 def get_animal_diet(animals):
-    pass
+    animal_diets = []
+
+    for animal in animals:
+        if "diet" in animal["characteristics"]:
+            animal_diets.append(animal["characteristics"]["diet"])
+        else:
+            animal_diets.append(None)
+
+    return animal_diets
 
 
 def get_animal_first_location(animals):
-    pass
+    animal_first_locations = []
+
+    for animal in animals:
+        animal_first_locations.append(animal["locations"][0])
+
+    return animal_first_locations
 
 
 def get_animal_type(animals):
-    pass
+    animal_types = []
+
+    for animal in animals:
+        if "type" in animal["characteristics"]:
+            animal_types.append(animal["characteristics"]["type"])
+        else:
+            animal_types.append(None)
+
+    return animal_types
 
 
 def get_animal_info(animals):
@@ -38,11 +58,10 @@ def print_animal_info(animals):
 
     for i in range(num_animals):
         for category, value in animals.items():
-            if value:
-                print(f'{category}: {value[i]}')
-            else:
+            if value is None or value[i] is None:
                 continue
-            print()
+            print(f'{category}: {value[i]}')
+        print()
 
 
 def main():
