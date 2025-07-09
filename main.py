@@ -1,3 +1,18 @@
+"""
+This module processes animal data and generates an HTML file
+showing formatted animal information for a website.
+
+Functions:
+- get_animal_name
+- get_animal_diet
+- get_animal_first_location
+- get_animal_type
+- serialize_animal
+- convert_animal_data_into_html_string
+- replace_data_in_html
+- create_animals_html
+- main
+"""
 from storage.storage_json import load_data
 from storage.storage_html import load_html
 
@@ -96,11 +111,14 @@ def create_animals_html(html_data):
     """
     Write the final HTML string to the output file.
     """
-    with open("static/animals.html", "w", encoding="utf-8") as f:
-        f.write(html_data)
+    with open("static/animals.html", "w", encoding="utf-8") as html_file:
+        html_file.write(html_data)
 
 
 def main():
+    """
+    Main entry point for generating the animals HTML page.
+    """
     animals_data = load_data("data/animals_data.json")
     animal_info = get_animal_info(animals_data)
     animals_html = convert_animal_data_into_html_string(animal_info)
