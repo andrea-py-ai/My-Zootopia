@@ -59,11 +59,12 @@ def order_animal_info_into_str(animals):
     animal_info_as_str = ""
 
     for i in range(num_animals):
+        animal_info_as_str += '<li class="cards__item">\n'
         for category, value in animals.items():
             if value is None or value[i] is None:
                 continue
-            animal_info_as_str += f'{category}: {value[i]}\n'
-        animal_info_as_str += "\n"
+            animal_info_as_str += f'{category}: {value[i]}<br/>\n'
+        animal_info_as_str += "</li>\n"
 
     return animal_info_as_str
 
